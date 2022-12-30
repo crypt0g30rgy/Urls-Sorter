@@ -20,3 +20,5 @@ No ssd
 
 I asked about a tool that could help me out in our whatsapp group of shield cyber security kenya but i didn't get help until someone pointed out to use chatgpt to create a tool.
 Another suggested using the Site: https://httpstatus.io but the site couldn't handle all those urls and i needed a one shot request and also i really wanted something i could create and own in my box for quick access.
+
+The progress folder includes all the scripts that i used chatgpt to write, i later updated and adapted them but the didn't work as i needed.
