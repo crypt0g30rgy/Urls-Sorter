@@ -1,0 +1,42 @@
+
+#import libraries
+import requests 
+import urllib.request
+from urllib.parse import urlparse
+
+#open the file containing urls
+f = open("urls.txt")
+
+#create an empty list to store visited urls
+visited_urls = []
+
+#loop through each line in the file
+for line in f:
+
+    #strip out the new line character
+    url = line.strip()
+
+    #parse the url
+    parsed_url = urlparse(url)
+    
+    #make a get request to the url
+    response = requests.get(url)
+    
+    #check the response code
+    if response.status_code == 200:
+        #add the url to the list of visited urls
+        visited_urls.append(url)
+    else:
+        #print the url and the response code
+        print(parsed_url.netloc + ' ' + str(response.status_code))
+
+#open a file to write the visited urls
+f = open("visited_urls.txt","w+")
+
+#loop through the list of visited urls
+for url in visited_urls:
+    #write the url to the file
+    f.write(url + "\n")
+
+#close the file
+f.close()

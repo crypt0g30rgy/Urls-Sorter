@@ -1,0 +1,90 @@
+# Attempt 3
+import re
+import urllib.request
+import os
+
+# prompt user for the file name
+file_name = input("Enter the file name with the URLs: ")
+
+# check if the file exist
+if os.path.exists(file_name):
+  # create the folder codes
+  os.mkdir('codes')
+
+  # open and read the file
+  with open(file_name, 'r') as f:
+    contents = f.readlines()
+
+    # loop through each line of the file
+    for line in contents:
+      try:
+        # get the response code
+        response_code = urllib.request.urlopen(line).getcode()
+
+        # use regex to match the response code
+        if re.match(r'2\d\d|3\d\d|4\d\d|5\d\d', str(response_code)) is not None:
+          # save the line (url) to the file
+          with open(os.path.join('codes', str(response_code) + '.txt'), 'a') as out:
+            out.write(line + '\n')
+      except Exception as e:
+        print("Error: ", e)
+
+else:
+  print("File not found")
+
+# Attempt 2
+import requests
+import re
+
+url_file = input("Enter file name containing urls: ")
+
+with open(url_file) as f:
+    lines = f.readlines()
+
+for line in lines:
+    url = line.strip()
+    response = requests.get(url)
+    response_code = response.status_code
+
+    if re.match("2\d\d",str(response_code)) :
+        with open('2xx.txt','a') as f:
+            f.write(url + '\n')
+    elif re.match("3\d\d",str(response_code)) :
+        with open('3xx.txt','a') as f:
+            f.write(url + '\n')
+    elif re.match("4\d\d",str(response_code)) :
+        with open('4xx.txt','a') as f:
+            f.write(url + '\n')
+    elif re.match("5\d\d",str(response_code)) :
+        with open('5xx.txt','a') as f:
+            f.write(url + '\n')
+
+1. Attempt
+import requests
+import re
+
+# Ask the user to input the file
+file_name = input('Enter a file name: ')
+# Open the file
+with open(file_name, 'r') as f:
+    # Read all the lines in the file
+    urls = f.readlines()
+
+# Create an empty list
+urls_visited = []
+# Iterate over all the urls
+for url in urls:
+    # Make a request to the url
+    response = requests.get(url)
+    # Get the response code
+    response_code = response.status_code
+    # Check if the response code matches the regex
+    if re.match(r'2\d\d|3\d\d|4\d\d|5\d\d', str(response_code)):
+        # Append the url to the list
+        urls_visited.append(url)
+
+# Open a new file to save the urls
+with open('urls_visited.txt', 'w') as f:
+    # Write the urls in the file
+    for url in urls_visited:
+        f.write(url)

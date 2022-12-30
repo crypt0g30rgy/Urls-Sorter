@@ -1,0 +1,90 @@
+import requests
+
+# open the file containing urls
+file = open("urls.txt", "r")
+urls = file.readlines()
+
+# open file to save urls based on response code
+file_200 = open("200.txt", "w")
+file_301 = open("301.txt", "w")
+file_302 = open("302.txt", "w")
+file_303 = open("303.txt", "w")
+file_305 = open("305.txt", "w")
+file_307 = open("307.txt", "w")
+file_308 = open("308.txt", "w")
+file_400 = open("400.txt", "w")
+file_401 = open("401.txt", "w")
+file_403 = open("403.txt", "w")
+file_404 = open("404.txt", "w")
+file_405 = open("405.txt", "w")
+file_406 = open("406.txt", "w")
+file_407 = open("407.txt", "w")
+file_408 = open("408.txt", "w")
+file_429 = open("429.txt", "w")
+file_500 = open("500.txt", "w")
+file_501 = open("200.txt", "w")
+file_502 = open("200.txt", "w")
+file_503 = open("200.txt", "w")
+file_504 = open("200.txt", "w")
+file_505 = open("200.txt", "w")
+
+# loop through each url
+for url in urls:
+    response = requests.get(url)
+    # save the url to the respective file based on response code
+    if response.status_code == 200:
+        file_200.write(url)
+    elif response.status_code == 301:
+        file_301.write(url)
+    elif response.status_code == 302:
+        file_302.write(url)
+    elif response.status_code == 303:
+        file_303.write(url)
+    elif response.status_code == 305:
+        file_305.write(url)
+    elif response.status_code == 307:
+        file_307.write(url)
+    elif response.status_code == 308:
+        file_308.write(url)
+    elif response.status_code == 302:
+        file_302.write(url)
+    elif response.status_code == 404:
+        file_404.write(url)
+    elif response.status_code == 302:
+        file_302.write(url)
+    elif response.status_code == 404:
+        file_404.write(url)    elif response.status_code == 302:
+        file_302.write(url)
+    elif response.status_code == 404:
+        file_404.write(url)
+    elif response.status_code == 302:
+        file_302.write(url)
+    elif response.status_code == 404:
+        file_404.write(url)
+    elif response.status_code == 403:
+        file_403.write(url)
+
+# close all files
+file.close()
+file_200.close()
+file_301.close()
+file_302.close()
+file_303.close()
+file_305.close()
+file_307.close()
+file_308.close()
+file_400.close()
+file_401.close()
+file_403.close()
+file_404.close()
+file_405.close()
+file_406.close()
+file_407.close()
+file_408.close()
+file_429.close()
+file_500.close()
+file_501.close()
+file_502.close()
+file_503.close()
+file_504.close()
+file_505.close()
