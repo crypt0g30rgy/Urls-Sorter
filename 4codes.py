@@ -30,6 +30,7 @@ out_2xx = open("codes/2XX_urls.txt", 'w')
 out_3xx = open("codes/3XX_urls.txt", 'w')
 out_4xx = open("codes/4XX_urls.txt", 'w')
 out_5xx = open("codes/5XX_urls.txt", 'w')
+out_errored = open("codes/errored.txt", 'w')
 
 # Read lines in input file
 for line in input_file:
@@ -38,8 +39,12 @@ for line in input_file:
     if re.search("^http[s]?://", line):
         # Visit the URL
         url = line
-        response = requests.get(url, verify=False,allow_redirects=False)
-        status = response.status_code
+        try:
+            response = requests.get(url, verify=False,allow_redirects=False)
+            status = response.status_code
+        except requests.exceptions.RequestException as e:
+            out_errored.write(f'Error while making request to {url}: {e}\n')
+            continue
 
         # Write URL to appropriate file
         if status // 100 == 2:
